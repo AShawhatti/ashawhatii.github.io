@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MYUI</title>
+    <link rel="stylesheet" href="css/games-styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <i class="fas fa-futbol"></i>
+                <span>MYUI</span>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item"><a href="index.html" class="nav-link">Home</a></li>
+                <li class="nav-item"><a href="#" class="nav-link active">Games</a></li>
+                <li class="nav-item"><a href="index.html#features" class="nav-link">Features</a></li>
+                <li class="nav-item"><a href="index.html#download" class="nav-link">Download</a></li>
+            </ul>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="games-hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Find Your Perfect Game</h1>
+                <p>Join pickup soccer games in your area or create your own</p>
+                <div class="hero-stats">
+                    <div class="stat">
+                        <span class="stat-number" data-count="247">0</span>
+                        <span class="stat-label">Active Games</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number" data-count="1834">0</span>
+                        <span class="stat-label">Players Online</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number" data-count="156">0</span>
+                        <span class="stat-label">Cities</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Search and Filters -->
+    <section class="search-section">
+        <div class="container">
+            <div class="search-bar">
+                <div class="search-input-group">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="searchInput" placeholder="Search by location, game name, or skill level...">
+                </div>
+                <button class="create-game-btn" id="createGameBtn">
+                    <i class="fas fa-plus"></i>
+                    Create Game
+                </button>
+            </div>
+            
+            <div class="filters-container">
+                <div class="filter-group">
+                    <label>Time</label>
+                    <div class="filter-buttons">
+                        <button class="filter-btn active" data-filter="time" data-value="all">All</button>
+                        <button class="filter-btn" data-filter="time" data-value="today">Today</button>
+                        <button class="filter-btn" data-filter="time" data-value="tomorrow">Tomorrow</button>
+                        <button class="filter-btn" data-filter="time" data-value="weekend">Weekend</button>
+                    </div>
+                </div>
+                
+                <div class="filter-group">
+                    <label>Skill Level</label>
+                    <div class="filter-buttons">
+                        <button class="filter-btn active" data-filter="skill" data-value="all">All</button>
+                        <button class="filter-btn" data-filter="skill" data-value="beginner">Beginner</button>
+                        <button class="filter-btn" data-filter="skill" data-value="intermediate">Intermediate</button>
+                        <button class="filter-btn" data-filter="skill" data-value="advanced">Advanced</button>
+                    </div>
+                </div>
+                
+                <div class="filter-group">
+                    <label>Distance</label>
+                    <div class="filter-buttons">
+                        <button class="filter-btn active" data-filter="distance" data-value="all">All</button>
+                        <button class="filter-btn" data-filter="distance" data-value="5km">5km</button>
+                        <button class="filter-btn" data-filter="distance" data-value="10km">10km</button>
+                        <button class="filter-btn" data-filter="distance" data-value="25km">25km</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="view-toggle">
+                <button class="view-btn active" data-view="grid">
+                    <i class="fas fa-th-large"></i>
+                </button>
+                <button class="view-btn" data-view="list">
+                    <i class="fas fa-list"></i>
+                </button>
+                <button class="view-btn" data-view="map">
+                    <i class="fas fa-map"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Games Container -->
+    <section class="games-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Available Games</h2>
+                <div class="sort-dropdown">
+                    <select id="sortSelect">
+                        <option value="date">Sort by Date</option>
+                        <option value="distance">Sort by Distance</option>
+                        <option value="players">Sort by Players Needed</option>
+                        <option value="skill">Sort by Skill Level</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="games-grid" id="gamesContainer">
+                <!-- Games will be populated by JavaScript -->
+            </div>
+            
+            <div class="load-more">
+                <button class="btn btn-secondary" id="loadMoreBtn">
+                    Load More Games
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Map View (Hidden by default) -->
+    <section class="map-section" id="mapSection" style="display: none;">
+        <div class="container-fluid">
+            <div class="map-container">
+                <div class="map-placeholder">
+                    <i class="fas fa-map-marked-alt"></i>
+                    <h3>Interactive Map</h3>
+                    <p>Map integration would show game locations here</p>
+                </div>
+                <div class="map-sidebar">
+                    <div class="map-games-list" id="mapGamesList">
+                        <!-- Map games list will be populated here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Game Details Modal -->
+    <div id="gameDetailsModal" class="modal">
+        <div class="modal-content large">
+            <span class="close">&times;</span>
+            <div class="modal-header">
+                <h2 id="gameDetailsTitle">Game Details</h2>
+                <div class="game-status" id="gameStatus">
+                    <span class="status-badge">Open</span>
+                </div>
+            </div>
+            <div class="modal-body" id="gameDetailsBody">
+                <!-- Game details will be populated here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Create/Join Game Modal -->
+    <div id="gameActionModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2 id="actionModalTitle">Join Game</h2>
+            <div class="modal-body" id="actionModalBody">
+                <!-- Form content will be populated here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Quick Filters Floating Panel -->
+    <div class="quick-filters" id="quickFilters">
+        <button class="quick-filter-btn" data-quick="nearby">
+            <i class="fas fa-location-arrow"></i>
+            Nearby
+        </button>
+        <button class="quick-filter-btn" data-quick="tonight">
+            <i class="fas fa-moon"></i>
+            Tonight
+        </button>
+        <button class="quick-filter-btn" data-quick="beginner">
+            <i class="fas fa-seedling"></i>
+            Beginner
+        </button>
+        <button class="quick-filter-btn" data-quick="available">
+            <i class="fas fa-users"></i>
+            Spots Available
+        </button>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <i class="fas fa-futbol"></i>
+                        <span>MYUI</span>
+                    </div>
+                    <p>Connecting soccer players worldwide, one game at a time.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="#">Games</a></li>
+                        <li><a href="index.html#features">Features</a></li>
+                        <li><a href="index.html#download">Download</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Support</h3>
+                    <ul>
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Follow Us</h3>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; MYUI</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="games-script.js"></script>
+</body>
+</html>
